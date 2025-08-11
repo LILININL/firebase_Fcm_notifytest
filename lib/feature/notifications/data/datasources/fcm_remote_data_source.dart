@@ -15,19 +15,11 @@ class FcmRemoteDataSourceImpl implements FcmRemoteDataSource {
   @override
   Stream<PushMessage> onForegroundMessages() {
     return FirebaseMessaging.onMessage.map((m) {
-      final pushMessage = PushMessage(
-        title: m.notification?.title,
-        body: m.notification?.body,
-        data: m.data,
-      );
-      
+      final pushMessage = PushMessage(title: m.notification?.title, body: m.notification?.body, data: m.data);
+
       // แสดง local notification บนหน้าจอเมื่อแอปเปิดอยู่
-      LocalNotificationService.showNotification(
-        title: pushMessage.title ?? 'แจ้งเตือน',
-        body: pushMessage.body ?? 'มีข้อความใหม่',
-        payload: pushMessage.data.toString(),
-      );
-      
+      LocalNotificationService.showNotification(title: pushMessage.title ?? 'แจ้งเตือน', body: pushMessage.body ?? 'มีข้อความใหม่', payload: pushMessage.data.toString());
+
       return pushMessage;
     });
   }
