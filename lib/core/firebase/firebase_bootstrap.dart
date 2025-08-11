@@ -72,12 +72,7 @@ class FirebaseBootstrapper {
     final messaging = FirebaseMessaging.instance;
 
     // Request permission for notifications
-    final settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
+    final settings = await messaging.requestPermission(alert: true, badge: true, sound: true, provisional: false);
 
     if (kDebugMode) {
       print('FCM Permission status: ${settings.authorizationStatus}');
